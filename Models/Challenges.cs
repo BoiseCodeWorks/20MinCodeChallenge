@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace challenges.Models
 {
     public static class Challenges
@@ -82,6 +85,54 @@ namespace challenges.Models
             }
             return sum;
         }
+
+        public static List<List<int>> ListGroup(int[] arr)
+        {
+            // create a dictionary
+            Dictionary<int, List<int>> dict = new Dictionary<int, List<int>>();
+            // loop over array and add each value as a key
+            foreach (int val in arr)
+            {
+                //  if it doesn't exist 
+                if (!dict.ContainsKey(val))
+                {
+                    // add a new list
+                    dict.Add(val, new List<int>());
+                }
+                // push into an array at that key
+                dict[val].Add(val);
+            }
+
+            //Return Dictionary Values as an array
+            return dict.Values.ToList();
+
+        }
+
+
+        public static int[][] ArrayGroup(int[] arr)
+        {
+            // create a dictionary
+            Dictionary<int, List<int>> dict = new Dictionary<int, List<int>>();
+            // loop over array and add each value as a key
+            foreach (int val in arr)
+            {
+                //  if it doesn't exist 
+                if (!dict.ContainsKey(val))
+                {
+                    // add a new list
+                    dict.Add(val, new List<int>());
+                }
+                // push into an array at that key
+                dict[val].Add(val);
+            }
+
+            //Return Dictionary Values as an array
+            var values = dict.Values.ToList();
+            var intList = new List<int[]>();
+            values.ForEach(v => intList.Add(v.ToArray()));
+            return intList.ToArray();
+        }
+
 
     }
 }
