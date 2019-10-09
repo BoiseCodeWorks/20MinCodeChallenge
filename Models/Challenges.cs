@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -133,6 +134,54 @@ namespace challenges.Models
             return intList.ToArray();
         }
 
+        public static int Kaprakar(int num)
+        {
+            int count = 0;
+            while (num != 6174)
+            {
+                count++;
+                //sort number ascending
+                int a = int.Parse(new string(num.ToString().OrderByDescending(d => d).ToArray()));
+                int d = int.Parse(new string(a.ToString().Reverse().ToArray()));
+                System.Console.WriteLine(d + "-" + a);
+                num = Math.Abs(d - a);
+            }
+            return count;
+        }
+
+
+        public static int KaprakarMath(int num)
+        {
+            int count = 0;
+            while (num != 6174 && count < 16)
+            {
+                count++;
+                int[] nums = new int[4];
+                for (int i = 0; i < 4; i++)
+                {
+                    nums[i] = num % 10;
+                    num /= 10;
+                }
+                Array.Sort(nums);
+
+                int ascending = 0;
+                foreach (int elem in nums)
+                {
+                    ascending *= 10;
+                    ascending += elem;
+                }
+                Array.Reverse(nums);
+                int descending = 0;
+                foreach (int elem in nums)
+                {
+                    descending *= 10;
+                    descending += elem;
+                }
+                System.Console.WriteLine(ascending + "-" + descending);
+                num = Math.Abs(ascending - descending);
+            }
+            return count;
+        }
 
     }
 }
